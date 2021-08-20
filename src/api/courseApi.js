@@ -1,5 +1,6 @@
 import { handleResponse, handleError } from "./apiUtils";
 const baseUrl = process.env.REACT_APP_API_URL + "/courses/";
+//REACT_APP_API_URL is saved in package.json, and process. env global variable is injected by the Node at runtime for your application to use 
 
 export function getCourses() {
   return fetch(baseUrl)
