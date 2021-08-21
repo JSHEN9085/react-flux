@@ -3,20 +3,19 @@ import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import Header from './common/Header';
 import CoursesPage from './CoursesPage';
+import { Route } from 'react-router-dom'; 
 
 function App() {
 
-    function getPage() {
-        const route = window.location.pathname; 
-        if(route === "/about") return <AboutPage/>; 
-        if(route === "/") return <HomePage/>; 
-        if(route === "/courses") return <CoursesPage/>;
-    }
+
 
     return (
         <div className="container-fluid">
             <Header/>
-            { getPage() } 
+            <Route path="/" exact component={HomePage}/> 
+            <Route path="/courses" component={CoursesPage}/> 
+            <Route path="/about" component={AboutPage}/> 
+            {/* Route allows multipul match, without keywork exact, other 2 components will also render home page as the route contain "/" */}
             {/* using {} to warp JavaScript inside JSX */}
         </div>
     )
