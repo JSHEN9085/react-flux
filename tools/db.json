@@ -72,19 +72,11 @@
     },
     {
       "id": 11,
-      "slug": "test-toast",
-      "title": "test toast",
-      "authorId": 1,
+      "slug": "test",
+      "title": "test",
+      "authorId": 2,
       "category": "test",
-      "createdAt": 1629607977161
-    },
-    {
-      "id": 12,
-      "slug": "afw",
-      "title": "afw",
-      "authorId": 1,
-      "category": "aafeawf",
-      "createdAt": 1629608015678
+      "createdAt": 1629650048651
     }
   ],
   "authors": [
