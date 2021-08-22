@@ -19,6 +19,7 @@ function App() {
             <Route path="/courses" component={CoursesPage}/> 
             <Route path="/about" component={AboutPage}/>
             <Route path="/course/:slug" component={ManageCoursePage}/>
+            <Route path="/course" component={ManageCoursePage}/>
             <Redirect from="/about-page" to="/about"/>
             <Route component={NotFoundPage}/> 
             {/* Route allows multipul match, without keywork exact, other 2 components will also render home page as the route contain "/" */}
