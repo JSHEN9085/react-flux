@@ -1,28 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
+import propTypes from 'prop-types'; 
 
 function TextInput(props) {
-  let wrapperClass = "form-group";
-  if (props.error.length > 0) {
-    wrapperClass += " has-error";
+
+  let wrapperClass = "form-group"
+  if(props.error.length > 0){
+    wrapperClass += " has error"; 
   }
 
-  return (
+  return(
     <div className={wrapperClass}>
       <label htmlFor={props.id}>{props.label}</label>
       <div className="field">
         <input
-          id={props.id}
-          type="text"
-          onChange={props.onChange}
-          name={props.name}
-          className="form-control"
-          value={props.value}
+        id={props.id}
+        type="text"
+        name={props.name}
+        className="form-control"
+        onChange={props.onChange}
+        value={props.value}
         />
       </div>
       {props.error && <div className="alert alert-danger">{props.error}</div>}
     </div>
-  );
+  )
 }
 
 TextInput.propTypes = {
@@ -32,10 +34,10 @@ TextInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
   error: PropTypes.string
-};
+}
 
 TextInput.defaultProps = {
   error: ""
-};
+}
 
 export default TextInput;
