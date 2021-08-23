@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import courseStore from '../stores/courseStore'; 
 import CourseList from "./CourseList"; 
 import { Link } from 'react-router-dom'; 
-
+import { loadCourses } from "../actions/courseActions"
 //class component
 // class CoursesPage extends Component {
 //     //with constructor 
@@ -54,14 +54,21 @@ import { Link } from 'react-router-dom';
 //functional component
 function CoursesPage() {
     //declare state here
-    const [ courses, setCourses] = useState( [] ); 
+    const [ courses, setCourses] = useState( courseStore.getCourses() ); 
     //first variable inside "courses" is the name of our state
     //second variable "setCourses" is the setter method to change the state
     //inside "useState", it initialize our state which is courses as an empty []
 
     useEffect( () => {
-        setCourses(courseStore.getCourses())
+        // console.log(courseStore.getCourses());
+        courseStore.addChangeListener(onChange); 
+        if(courseStore.getCourses().length === 0) loadCourses(); 
+        return () => courseStore.removeChangeListener(onChange); // cleanup on unmount
     }, []) //"[]" here means this function only run once
+
+    function onChange() {
+        setCourses(courseStore.getCourses())
+    }
 
     return (
         <>
