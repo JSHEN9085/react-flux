@@ -10,7 +10,7 @@ const ManageCoursePage = props => {
     // console.log(props);
 
     const [errors, setErrors] = useState({}); 
-
+    const [courses, setCourses] = useState(courseStore.getCourses());
     const [course, setCourse] = useState({
         id: null, 
         slug: "",
@@ -20,11 +20,19 @@ const ManageCoursePage = props => {
     }) 
 
     useEffect( () => {
+        courseStore.addChangeListener(onChange); 
         const slug = props.match.params.slug; //obtain the path '/courses/:slug'
-        if(slug){
+        if(courses.length === 0){
+            courseActions.loadCourses(); 
+        } else if(slug){
             setCourse(courseStore.getCourseBySlug(slug))
         }
-    }, [props.match.params.slug]) //if any dependencies listed here changed, then the effect will re-run
+        return () => courseStore.removeChangeListener(onChange); 
+    }, [courses.length, props.match.params.slug]) //if any dependencies listed here changed, then the effect will re-run
+
+    function onChange() {
+        setCourses(courseStore.getCourses()); 
+    }
 
     function formIsValid() {
         const _errors = {}; 
