@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'; 
 // import { Prompt } from 'react-router-dom'; 
 import CourseForm from './CourseForm'; 
-import * as courseApi from "../api/courseApi"; 
+// import * as courseApi from "../api/courseApi";
+import courseStore from '../stores/courseStore';
+import * as courseActions from '../actions/courseActions'; 
 import { toast } from "react-toastify"; 
-import { NUMBER_UNARY_OPERATORS } from '@babel/types';
 
 const ManageCoursePage = props => {
     // console.log(props);
@@ -21,9 +22,7 @@ const ManageCoursePage = props => {
     useEffect( () => {
         const slug = props.match.params.slug; //obtain the path '/courses/:slug'
         if(slug){
-            courseApi.getCourseBySlug(slug).then(_course => {
-                setCourse(_course)
-            })
+            setCourse(courseStore.getCourseBySlug(slug))
         }
     }, [props.match.params.slug]) //if any dependencies listed here changed, then the effect will re-run
 
@@ -50,7 +49,7 @@ const ManageCoursePage = props => {
         console.log(event) 
         event.preventDefault(); 
         if(!formIsValid()) return; 
-        courseApi.saveCourse(course).then( () => {
+        courseActions.saveCourse(course).then( () => {
             props.history.push("/courses");
             toast.success('Course saved.'); 
         });         

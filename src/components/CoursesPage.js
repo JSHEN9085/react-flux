@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"; 
-import { getCourses } from "../api/courseApi"; 
+// import { getCourses } from "../api/courseApi"; 
+import courseStore from '../stores/courseStore'; 
 import CourseList from "./CourseList"; 
 import { Link } from 'react-router-dom'; 
 
@@ -59,7 +60,7 @@ function CoursesPage() {
     //inside "useState", it initialize our state which is courses as an empty []
 
     useEffect( () => {
-        getCourses().then(data => setCourses(data))
+        setCourses(courseStore.getCourses())
     }, []) //"[]" here means this function only run once
 
     return (
